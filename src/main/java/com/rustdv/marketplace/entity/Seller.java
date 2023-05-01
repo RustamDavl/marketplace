@@ -2,6 +2,7 @@ package com.rustdv.marketplace.entity;
 
 import com.rustdv.marketplace.entity.embeddable.OrganizationType;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -11,10 +12,10 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 @Entity
 @Table(name = "seller")
 public class Seller extends User<Long> {

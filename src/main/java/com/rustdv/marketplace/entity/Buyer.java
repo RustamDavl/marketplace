@@ -3,6 +3,7 @@ package com.rustdv.marketplace.entity;
 
 import com.rustdv.marketplace.entity.embeddable.Sex;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -13,13 +14,15 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@ToString
-@AllArgsConstructor
+@ToString(callSuper = true)
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Builder
+@SuperBuilder
 @Table(name = "buyer")
 public class Buyer extends User<Long> {
+
+
 
     @Enumerated(EnumType.STRING)
     private Sex sex;
@@ -30,6 +33,8 @@ public class Buyer extends User<Long> {
     @OneToMany(mappedBy = "buyer", cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Cart> cart = new ArrayList<>();
+
+
 
     @Override
     public boolean equals(Object o) {
