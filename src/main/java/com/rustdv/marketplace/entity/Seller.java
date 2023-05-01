@@ -35,6 +35,11 @@ public class Seller extends User<Long> {
     @ToString.Exclude
     private List<Goods> goods = new ArrayList<>();
 
+    public void addGoods(Goods goods) {
+        this.goods.add(goods);
+        goods.setSeller(this);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
