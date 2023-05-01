@@ -31,7 +31,7 @@ public class Seller extends User<Long> {
     private String magazineName;
 
     @Builder.Default
-    @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Goods> goods = new ArrayList<>();
 
