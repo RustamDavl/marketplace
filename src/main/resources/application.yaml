@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    password: password
+    url: jdbc:postgresql://localhost:5432/marketplace
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+
+  jpa:
+    properties.hibernate:
+      show_sql: true
+      format_sql: true
+      hbm2ddl.auto: create
+    open-in-view: false
+
