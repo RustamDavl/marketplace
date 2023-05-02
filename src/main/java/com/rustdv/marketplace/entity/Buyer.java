@@ -1,7 +1,7 @@
 package com.rustdv.marketplace.entity;
 
 
-import com.rustdv.marketplace.entity.embeddable.Sex;
+import com.rustdv.marketplace.entity.embeddable.Gender;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
@@ -25,11 +25,12 @@ public class Buyer extends User<Long> {
 
 
     @Enumerated(EnumType.STRING)
-    private Sex sex;
+    private Gender gender;
 
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
+    @Builder.Default
     @OneToMany(mappedBy = "buyer", cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Cart> cart = new ArrayList<>();

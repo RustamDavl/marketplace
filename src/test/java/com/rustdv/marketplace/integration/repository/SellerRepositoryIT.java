@@ -4,13 +4,10 @@ package com.rustdv.marketplace.integration.repository;
 import com.rustdv.marketplace.entity.Seller;
 import com.rustdv.marketplace.entity.embeddable.Address;
 import com.rustdv.marketplace.entity.embeddable.OrganizationType;
-import com.rustdv.marketplace.entity.embeddable.Sex;
 import com.rustdv.marketplace.integration.IntegrationTestBase;
 import com.rustdv.marketplace.repository.SellerRepository;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
