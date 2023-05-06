@@ -20,8 +20,10 @@ public abstract class User<ID extends Serializable> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected ID id;
+    @Column(unique = true)
     protected String email;
     protected String password;
+    @Column(unique = true)
     protected String phoneNumber;
     @CreationTimestamp
     protected LocalDateTime registerAt;

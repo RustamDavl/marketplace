@@ -5,6 +5,8 @@ import com.rustdv.marketplace.entity.embeddable.Gender;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -31,7 +33,8 @@ public class Buyer extends User<Long> {
     private LocalDate birthDate;
 
     @Builder.Default
-    @OneToMany(mappedBy = "buyer", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "buyer")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @ToString.Exclude
     private List<Cart> cart = new ArrayList<>();
 

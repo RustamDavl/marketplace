@@ -1,5 +1,6 @@
 package com.rustdv.marketplace.entity;
 
+import com.rustdv.marketplace.entity.embeddable.PurchaseStatus;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -34,6 +35,10 @@ public class Cart {
     private Goods goods;
 
     private Long amount;
+
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "purchaseStatus")
+    private PurchaseStatus purchaseStatus;
 
     public void addBuyer(Buyer buyer) {
         this.buyer = buyer;

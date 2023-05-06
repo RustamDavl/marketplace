@@ -1,4 +1,8 @@
 spring:
+  mvc:
+    format:
+      time: iso
+      date: iso
   datasource:
     password: password
     url: jdbc:postgresql://localhost:5432/marketplace
