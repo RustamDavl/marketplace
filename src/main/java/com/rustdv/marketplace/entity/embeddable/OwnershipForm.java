@@ -5,18 +5,18 @@ import com.rustdv.marketplace.exception.NoSuchElementInEnumException;
 import java.util.Arrays;
 import java.util.List;
 
-public enum OrganizationType {
+public enum OwnershipForm {
     OOO("ООО"),
     IP("ИП"),
     OAO("ОАО");
 
     private String organization;
 
-    private OrganizationType(String organization) {
+    private OwnershipForm(String organization) {
         this.organization = organization;
     }
-    public static OrganizationType getOrganizationType(String organization) {
-        List<OrganizationType> organizationList = Arrays.stream(OrganizationType.values())
+    public static OwnershipForm getOwnershipForm(String organization) {
+        List<OwnershipForm> organizationList = Arrays.stream(OwnershipForm.values())
                 .filter(organizationType -> organizationType.organization.equals(organization))
                 .toList();
 
@@ -25,5 +25,10 @@ public enum OrganizationType {
 
         return organizationList.get(0);
 
+    }
+
+    @Override
+    public String toString() {
+        return this.organization;
     }
 }

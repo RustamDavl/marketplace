@@ -5,7 +5,6 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,40 +14,40 @@ import java.util.Objects;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Entity
-@Table(name = "goods")
-public class Goods {
-
+@Builder
+@Table(name = "shop")
+public class Shop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private BigDecimal price;
+    @Enumerated(EnumType.STRING)
+    private GoodsCategory goodsCategory;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "shop_id", nullable = false)
     @ToString.Exclude
-    private Shop shop;
-
-    @Column(nullable = false)
-    private Integer amount;
+    @ManyToOne
+    @JoinColumn(name = "seller_id")
+    private Seller seller;
 
     @Builder.Default
-    @OneToMany(mappedBy = "goods", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @ToString.Exclude
-    private List<Cart> cart = new ArrayList<>();
+    private List<Goods> goods = new ArrayList<>();
+
+    public void addGoods(Goods goods) {
+        this.goods.add(goods);
+        goods.setShop(this);
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Goods goods = (Goods) o;
-        return id != null && Objects.equals(id, goods.id);
+        Shop shop = (Shop) o;
+        return id != null && Objects.equals(id, shop.id);
     }
 
     @Override

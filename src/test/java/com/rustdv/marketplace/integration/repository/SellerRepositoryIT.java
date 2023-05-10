@@ -3,7 +3,7 @@ package com.rustdv.marketplace.integration.repository;
 
 import com.rustdv.marketplace.entity.Seller;
 import com.rustdv.marketplace.entity.embeddable.Address;
-import com.rustdv.marketplace.entity.embeddable.OrganizationType;
+import com.rustdv.marketplace.entity.embeddable.OwnershipForm;
 import com.rustdv.marketplace.integration.IntegrationTestBase;
 import com.rustdv.marketplace.repository.SellerRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,20 +18,12 @@ public class SellerRepositoryIT extends IntegrationTestBase {
 
     @Test
     void save() {
-        var address = Address.builder()
-                .city("Kazan")
-                .street("Test street")
-                .houseNumber("16k1")
-                .build();
 
         Seller seller = Seller.builder()
                 .email("test@gmail.com")
                 .password("strong")
                 .phoneNumber("89179209061")
-                .address(address)
-                .inn("123456789012")
-                .magazineName("CoolName")
-                .organizationType(OrganizationType.IP)
+                .ownershipForm(OwnershipForm.IP)
                 .build();
         sellerRepository.save(seller);
         var actualResult = sellerRepository.findById(seller.getId());
@@ -40,7 +32,7 @@ public class SellerRepositoryIT extends IntegrationTestBase {
         assertThat(actualResult.get().getEmail()).isEqualTo(seller.getEmail());
         assertThat(actualResult.get().getPassword()).isEqualTo(seller.getPassword());
         assertThat(actualResult.get().getPhoneNumber()).isEqualTo(seller.getPhoneNumber());
-        assertThat(actualResult.get().getOrganizationType().name()).isEqualTo(seller.getOrganizationType().name());
+        assertThat(actualResult.get().getOwnershipForm().name()).isEqualTo(seller.getOwnershipForm().name());
 
     }
 }

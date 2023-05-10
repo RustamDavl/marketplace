@@ -1,9 +1,7 @@
 package com.rustdv.marketplace.unit.entity.embeddable;
 
-import com.rustdv.marketplace.entity.embeddable.Gender;
-import com.rustdv.marketplace.entity.embeddable.OrganizationType;
+import com.rustdv.marketplace.entity.embeddable.OwnershipForm;
 import com.rustdv.marketplace.exception.NoSuchElementInEnumException;
-import org.aspectj.weaver.ast.Or;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -12,22 +10,21 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-class OrganizationTypeTest {
+class OwnershipFormTest {
 
     @Test
     void getOrganizationTypeShouldPass() {
         var IPOrganizationType = "ИП";
         var OOOOrganizationType = "ООО";
         var OAOOrganizationType = "ОАО";
-        var IP = OrganizationType.getOrganizationType(IPOrganizationType);
-        var OOO = OrganizationType.getOrganizationType(OOOOrganizationType);
-        var OAO = OrganizationType.getOrganizationType(OAOOrganizationType);
+        var IP = OwnershipForm.getOwnershipForm(IPOrganizationType);
+        var OOO = OwnershipForm.getOwnershipForm(OOOOrganizationType);
+        var OAO = OwnershipForm.getOwnershipForm(OAOOrganizationType);
 
-        assertThat(IP).isEqualTo(OrganizationType.IP);
-        assertThat(OOO).isEqualTo(OrganizationType.OOO);
-        assertThat(OAO).isEqualTo(OrganizationType.OAO);
+        assertThat(IP).isEqualTo(OwnershipForm.IP);
+        assertThat(OOO).isEqualTo(OwnershipForm.OOO);
+        assertThat(OAO).isEqualTo(OwnershipForm.OAO);
 
     }
 
@@ -35,7 +32,7 @@ class OrganizationTypeTest {
     @MethodSource("com.rustdv.marketplace.unit.entity.embeddable.OrganizationTypeTest#organizationsArguments")
     void getOrganizationTypeShouldThrowException(String organizationType) {
 
-        org.junit.jupiter.api.Assertions.assertThrows(NoSuchElementInEnumException.class, () -> OrganizationType.getOrganizationType(organizationType));
+        org.junit.jupiter.api.Assertions.assertThrows(NoSuchElementInEnumException.class, () -> OwnershipForm.getOwnershipForm(organizationType));
 
 
 

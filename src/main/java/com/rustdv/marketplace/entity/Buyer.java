@@ -1,6 +1,7 @@
 package com.rustdv.marketplace.entity;
 
 
+import com.rustdv.marketplace.entity.embeddable.Address;
 import com.rustdv.marketplace.entity.embeddable.Gender;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -37,6 +38,9 @@ public class Buyer extends User<Long> {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @ToString.Exclude
     private List<Cart> cart = new ArrayList<>();
+
+    @Embedded
+    protected Address address;
 
 
 

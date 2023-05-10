@@ -3,13 +3,14 @@ package com.rustdv.marketplace.dto.read;
 import lombok.Builder;
 import lombok.Value;
 
-@Value
+import java.util.List;
+
 @Builder
-public class ReadGoodsDto {
+@Value
+public class ReadShopDto {
 
     Long id;
     String name;
-    String price;
-    String amount;
-    ReadShopDto readShopDto;
+    String goodsCategory;
+    ReadSellerDto readSellerDto;
 }

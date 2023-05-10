@@ -1,5 +1,6 @@
 package com.rustdv.marketplace.unit.mapper;
 
+import com.rustdv.marketplace.dto.read.ReadBuyerDto;
 import com.rustdv.marketplace.entity.Buyer;
 import com.rustdv.marketplace.entity.embeddable.Address;
 import com.rustdv.marketplace.entity.embeddable.Gender;
@@ -41,15 +42,26 @@ class ReadBuyerDtoMapperTest {
                 .phoneNumber("89179209061")
                 .registerAt(LocalDateTime.now())
                 .build();
+        var expectedResult = ReadBuyerDto.builder()
+                .email("test@gmail.com")
+                .city("Kazan")
+                .street("Test street")
+                .houseNumber("16k1")
+                .gender("мужчина")
+                .birthDate(LocalDate.of(2001, 1, 29))
+                .phoneNumber("89179209061")
+                .registerAt(buyer.getRegisterAt().toString())
+                .build();
 
         var actualResult = readBuyerDtoMapper.map(buyer);
 
-        assertThat(actualResult.getEmail()).isEqualTo(buyer.getEmail());
-        assertThat(actualResult.getPhoneNumber()).isEqualTo(buyer.getPhoneNumber());
-        assertThat(actualResult.getCity()).isEqualTo(buyer.getAddress().getCity());
-        assertThat(actualResult.getStreet()).isEqualTo(buyer.getAddress().getStreet());
-        assertThat(actualResult.getHouseNumber()).isEqualTo(buyer.getAddress().getHouseNumber());
-        assertThat(actualResult.getEmail()).isEqualTo(buyer.getEmail());
-        assertThat(actualResult.getBirthDate()).isEqualTo(buyer.getBirthDate().toString());
+        assertThat(actualResult.getEmail()).isEqualTo(expectedResult.getEmail());
+        assertThat(actualResult.getPhoneNumber()).isEqualTo(expectedResult.getPhoneNumber());
+        assertThat(actualResult.getCity()).isEqualTo(expectedResult.getCity());
+        assertThat(actualResult.getStreet()).isEqualTo(expectedResult.getStreet());
+        assertThat(actualResult.getHouseNumber()).isEqualTo(expectedResult.getHouseNumber());
+        assertThat(actualResult.getEmail()).isEqualTo(expectedResult.getEmail());
+        assertThat(actualResult.getBirthDate()).isEqualTo(expectedResult.getBirthDate().toString());
+        assertThat(actualResult.getGender()).isEqualTo(expectedResult.getGender());
     }
 }

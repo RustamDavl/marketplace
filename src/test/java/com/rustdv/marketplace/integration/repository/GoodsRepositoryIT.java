@@ -2,78 +2,76 @@ package com.rustdv.marketplace.integration.repository;
 
 import com.rustdv.marketplace.entity.Goods;
 import com.rustdv.marketplace.entity.Seller;
+import com.rustdv.marketplace.entity.Shop;
 import com.rustdv.marketplace.entity.embeddable.Address;
 import com.rustdv.marketplace.entity.embeddable.GoodsCategory;
-import com.rustdv.marketplace.entity.embeddable.OrganizationType;
+import com.rustdv.marketplace.entity.embeddable.OwnershipForm;
 import com.rustdv.marketplace.integration.IntegrationTestBase;
 import com.rustdv.marketplace.repository.GoodsRepository;
 import com.rustdv.marketplace.repository.SellerRepository;
+import com.rustdv.marketplace.repository.ShopRepository;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.SqlConfig;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RequiredArgsConstructor
+@Sql(
+        value = "classpath:sql/data.sql",
+        config = @SqlConfig(encoding = "utf-8")
+)
 public class GoodsRepositoryIT extends IntegrationTestBase {
 
     private final GoodsRepository goodsRepository;
-    private final SellerRepository sellerRepository;
+    private final ShopRepository shopRepository;
 
-    private Goods goods;
+    private List<Goods> goods;
+
+    private Shop shop;
 
     private Seller seller;
 
     @BeforeEach
     void setUp() {
-        goods = Goods.builder()
+
+        goods = new ArrayList<>();
+        goods.add(Goods.builder()
                 .name("Very good item")
                 .amount(10)
-                .goodsCategory(GoodsCategory.ADULT)
                 .price(BigDecimal.valueOf(1456))
-                .build();
+                .build());
 
-        Address address = Address.builder()
-                .city("Kazan")
-                .street("Test street")
-                .houseNumber("16k1")
-                .build();
-
-        seller = Seller.builder()
-                .email("test@gmail.com")
-                .password("strong")
-                .phoneNumber("89179209061")
-                .address(address)
-                .inn("123456789012")
-                .magazineName("CoolName")
-                .organizationType(OrganizationType.IP)
-                .build();
+        goods.add(Goods.builder()
+                .name("sport item")
+                .amount(5)
+                .price(BigDecimal.valueOf(2000))
+                .build());
 
     }
 
     @Test
     void save() {
+        var actualShop = shopRepository.findById(1L);
+        actualShop.ifPresent(
+                shop1 -> {
+                    goods.forEach(
+                            shop1::addGoods
+                    );
+                    shopRepository.flush();
+                }
+        );
 
-        seller.addGoods(goods);
-
-        sellerRepository.save(seller);
-
-        var actualSeller = sellerRepository.findById(seller.getId());
-
-        var actualGoods = goodsRepository.findById(goods.getId());
-        assertThat(actualGoods).isPresent();
-        assertThat(actualGoods.get()).isEqualTo(goods);
-        assertThat(actualSeller).isPresent();
-        assertThat(actualSeller.get().getEmail()).isEqualTo(seller.getEmail());
-        assertThat(actualSeller.get().getPassword()).isEqualTo(seller.getPassword());
-        assertThat(actualSeller.get().getPhoneNumber()).isEqualTo(seller.getPhoneNumber());
-        assertThat(actualSeller.get().getOrganizationType().name()).isEqualTo(seller.getOrganizationType().name());
-        assertThat(actualSeller.get().getGoods().get(0)).isEqualTo(goods);
-
-
-
+        var actualGoods = goodsRepository.findAll();
+        assertThat(actualGoods).hasSize(2);
+        assertThat(actualGoods.get(0).getId()).isNotNull();
+        assertThat(actualGoods.get(1).getId()).isNotNull();
 
     }
 }

@@ -13,8 +13,8 @@ public class ReadSellerDtoMapper implements Mapper<Seller, ReadSellerDto> {
         return ReadSellerDto.builder()
                 .id(from.getId())
                 .email(from.getEmail())
-                .magazineName(from.getMagazineName())
                 .registerAt(from.getRegisterAt())
+                .ownershipForm(from.getOwnershipForm().toString())
                 .build();
     }
 }

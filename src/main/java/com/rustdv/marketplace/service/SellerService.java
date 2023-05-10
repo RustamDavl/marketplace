@@ -1,8 +1,12 @@
 package com.rustdv.marketplace.service;
 
 import com.rustdv.marketplace.dto.auth.SellerRegistrationDto;
+import com.rustdv.marketplace.dto.createupdate.CreateUpdateGoodsDto;
+import com.rustdv.marketplace.dto.read.ReadGoodsDto;
 import com.rustdv.marketplace.dto.read.ReadSellerDto;
 import com.rustdv.marketplace.exception.UserAlreadyExistsException;
+import com.rustdv.marketplace.mapper.CreateUpdateGoodsDtoMapper;
+import com.rustdv.marketplace.mapper.ReadGoodsDtoMapper;
 import com.rustdv.marketplace.mapper.ReadSellerDtoMapper;
 import com.rustdv.marketplace.mapper.SellerRegistrationDtoMapper;
 import com.rustdv.marketplace.repository.SellerRepository;
@@ -21,6 +25,10 @@ public class SellerService {
 
     private final ReadSellerDtoMapper readSellerDtoMapper;
 
+    private final CreateUpdateGoodsDtoMapper createUpdateGoodsDtoMapper;
+
+    private final ReadGoodsDtoMapper readGoodsDtoMapper;
+
     public ReadSellerDto register(SellerRegistrationDto sellerRegistrationDto) {
 
         var maybeSeller = sellerRepository.findByEmail(sellerRegistrationDto.getEmail());
@@ -35,5 +43,7 @@ public class SellerService {
 
         return readSellerDtoMapper.map(sellerToSave);
     }
+
+
 
 }

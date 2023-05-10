@@ -27,6 +27,5 @@ public abstract class User<ID extends Serializable> {
     protected String phoneNumber;
     @CreationTimestamp
     protected LocalDateTime registerAt;
-    @Embedded
-    protected Address address;
+
 }

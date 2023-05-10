@@ -3,7 +3,11 @@ insert into buyer
 values (
         'Kazan', '16k1', 'Ametevo', 'easton12345@gmail.com', 'pass', '89179209061', current_timestamp, current_date, 'MALE'
        );
-insert into seller (city, house_number, street, email, password, phone_number, register_at, inn, magazine_name, organization_type)
+insert into seller ( email, password, phone_number, register_at, ownership_form)
 values (
-           'Kazan', '16k1', 'Ametevo', 'easton12345@gmail.com', 'pass', '89179209061', current_timestamp, '1234567890', 'magazine name', 'IP'
+            'easton12345@gmail.com', 'pass', '89179209061', current_timestamp,'IP'
+       );
+insert into shop(goods_category, name, seller_id)
+values (
+        'MUSIC', 'my shop', 1
        );

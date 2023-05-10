@@ -14,8 +14,9 @@ public enum Gender {
         this.gender = gender;
     }
 
+
     public static Gender getGender(String requestGender) {
-        if(requestGender == null)
+        if (requestGender == null)
             throw new RuntimeException("incorrect request gender");
 
         var genderList = Arrays.stream(Gender.values())
@@ -26,5 +27,10 @@ public enum Gender {
 
         return genderList.get(0);
 
+    }
+
+    @Override
+    public String toString() {
+        return this.gender;
     }
 }

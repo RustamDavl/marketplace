@@ -1,6 +1,6 @@
 package com.rustdv.marketplace.entity;
 
-import com.rustdv.marketplace.entity.embeddable.OrganizationType;
+import com.rustdv.marketplace.entity.embeddable.OwnershipForm;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
@@ -21,25 +21,19 @@ import java.util.Objects;
 public class Seller extends User<Long> {
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "organization_type", nullable = false)
-    private OrganizationType organizationType;
+    @Column(name = "ownership_form", nullable = false)
+    private OwnershipForm ownershipForm;
 
-    @Column(unique = true, length = 12, nullable = false)
-    private String inn;
-
-    @Column(name = "magazine_name", unique = true, nullable = false)
-    private String magazineName;
-
-    @Builder.Default
-    @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @ToString.Exclude
-    private List<Goods> goods = new ArrayList<>();
+    @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL)
+    @Builder.Default
+    private List<Shop> shops = new ArrayList<>();
 
-    public void addGoods(Goods goods) {
-        this.goods.add(goods);
-        goods.setSeller(this);
+
+    public void addShop(Shop shop) {
+        this.shops.add(shop);
+        shop.setSeller(this);
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

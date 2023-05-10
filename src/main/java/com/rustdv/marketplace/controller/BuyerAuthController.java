@@ -17,7 +17,7 @@ public class BuyerAuthController {
     private final BuyerService buyerService;
 
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<ReadBuyerDto> register(@RequestBody BuyerRegistrationDto buyerRegistrationDto) {
 
         return ResponseEntity.status(HttpStatus.CREATED)

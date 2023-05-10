@@ -14,4 +14,5 @@ public class ReadSellerDto {
     String email;
     String magazineName;
     LocalDateTime registerAt;
+    String ownershipForm;
 }

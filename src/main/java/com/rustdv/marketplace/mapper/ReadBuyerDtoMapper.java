@@ -16,7 +16,7 @@ public class ReadBuyerDtoMapper implements Mapper<Buyer, ReadBuyerDto> {
                 .city(from.getAddress().getCity())
                 .street(from.getAddress().getStreet())
                 .houseNumber(from.getAddress().getHouseNumber())
-                .gender(from.getGender().name())
+                .gender(from.getGender().toString())
                 .registerAt(from.getRegisterAt().toString())
                 .phoneNumber(from.getPhoneNumber())
                 .build();

@@ -10,11 +10,6 @@ public class SellerRegistrationDto {
     String email;
     String password;
     String phoneNumber;
-    String city;
-    String street;
-    String houseNumber;
-    String organizationType;
-    String inn;
-    String magazineName;
+    String ownershipForm;
 
 }

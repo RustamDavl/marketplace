@@ -3,16 +3,14 @@ package com.rustdv.marketplace.unit.mapper;
 import com.rustdv.marketplace.dto.read.ReadSellerDto;
 import com.rustdv.marketplace.entity.Seller;
 import com.rustdv.marketplace.entity.embeddable.Address;
-import com.rustdv.marketplace.entity.embeddable.OrganizationType;
+import com.rustdv.marketplace.entity.embeddable.OwnershipForm;
 import com.rustdv.marketplace.mapper.ReadSellerDtoMapper;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class ReadSellerDtoMapperTest {
 
@@ -29,15 +27,8 @@ class ReadSellerDtoMapperTest {
                 .id(10L)
                 .email("easton12345@gmail.com")
                 .password("strong")
-                .address(Address.builder()
-                        .city("Kazan")
-                        .street("street")
-                        .houseNumber("16k1")
-                        .build())
-                .inn("123456789012")
-                .magazineName("name")
                 .phoneNumber("89179308071")
-                .organizationType(OrganizationType.IP)
+                .ownershipForm(OwnershipForm.IP)
                 .registerAt(LocalDateTime.now())
                 .build();
 
