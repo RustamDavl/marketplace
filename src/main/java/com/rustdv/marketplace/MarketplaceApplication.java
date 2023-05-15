@@ -9,7 +9,7 @@ public class MarketplaceApplication {
 
     public static void main(String[] args) {
 
-       @Cleanup var context = SpringApplication.run(MarketplaceApplication.class, args);
+       var context = SpringApplication.run(MarketplaceApplication.class, args);
     }
 
 }

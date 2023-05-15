@@ -12,7 +12,6 @@ public class ReadSellerDto {
 
     Long id;
     String email;
-    String magazineName;
     LocalDateTime registerAt;
     String ownershipForm;
 }

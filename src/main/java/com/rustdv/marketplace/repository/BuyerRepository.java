@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface BuyerRepository extends JpaRepository<Buyer, Long> {
 
     Optional<Buyer> findByEmail(String email);
+
+    Optional<Buyer> findByEmailAndPassword(String email, String password);
 }

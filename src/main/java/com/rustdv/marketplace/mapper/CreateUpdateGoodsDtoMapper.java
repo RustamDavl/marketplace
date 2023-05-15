@@ -14,9 +14,10 @@ public class CreateUpdateGoodsDtoMapper implements Mapper<CreateUpdateGoodsDto, 
 
         return Goods.builder()
                 .name(from.getName())
-                .amount(Integer.valueOf(from.getAmount()))
+                .amount(Integer.parseInt(from.getAmount()))
                 .price(BigDecimal.valueOf(Long.parseLong(from.getPrice())))
                 .build();
 
     }
+
 }

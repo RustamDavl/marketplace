@@ -36,7 +36,7 @@ public class Cart {
 
     private Long amount;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     @Column(name = "purchaseStatus")
     private PurchaseStatus purchaseStatus;
 

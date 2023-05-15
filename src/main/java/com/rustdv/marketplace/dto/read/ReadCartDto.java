@@ -8,5 +8,9 @@ import lombok.Value;
 public class ReadCartDto {
 
     Long id;
+    Long amount;
+    ReadBuyerDto readBuyerDto;
+    ReadGoodsDto readGoodsDto;
+
 
 }

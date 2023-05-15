@@ -23,8 +23,6 @@ public class SellerServiceIT extends IntegrationTestBase {
 
     private final SellerService sellerService;
 
-    private final SellerRepository sellerRepository;
-
 
     @Test
     void registerShouldPass() {
@@ -36,6 +34,7 @@ public class SellerServiceIT extends IntegrationTestBase {
                 .build();
         var actualResult = sellerService.register(registrationSellerDtoRequest);
 
+        assertThat(actualResult.getId()).isNotNull();
         assertThat(actualResult.getEmail()).isEqualTo(registrationSellerDtoRequest.getEmail());
         assertThat(actualResult.getOwnershipForm()).isEqualTo(registrationSellerDtoRequest.getOwnershipForm());
 

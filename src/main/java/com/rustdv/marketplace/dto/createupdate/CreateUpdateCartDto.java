@@ -1,17 +1,18 @@
 package com.rustdv.marketplace.dto.createupdate;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Value;
 
 import javax.validation.constraints.NotBlank;
 
 @Builder
 @Value
-public class CreateUpdateGoodsDto {
+public class CreateUpdateCartDto {
 
     @NotBlank
-    String name;
+    String buyerId;
     @NotBlank
-    String price;
+    String goodsId;
     @NotBlank
     String amount;
 }

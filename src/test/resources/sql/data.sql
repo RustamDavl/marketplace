@@ -9,5 +9,5 @@ values (
        );
 insert into shop(goods_category, name, seller_id)
 values (
-        'MUSIC', 'my shop', 1
+        'MUSIC', 'my shop', (select id  from seller where email = 'easton12345@gmail.com')
        );
