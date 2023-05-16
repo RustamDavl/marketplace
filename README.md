@@ -1,11 +1,11 @@
 # marketplace
 just a simple restfull application with two types of users: seller and buyer.
-endpoints:
--seller
---registration/authentication
---create shop
---add goods to shop
--buyer
---registration/authentication
---add goods to cart
+endpoints:__
+-seller__
+--registration/authentication__
+--create shop__
+--add goods to shop__
+-buyer__
+--registration/authentication__
+--add goods to cart__
 --buy goods which are in the cart
