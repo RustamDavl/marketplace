@@ -1,20 +1,12 @@
 package com.rustdv.marketplace.service;
 
 import com.rustdv.marketplace.dto.auth.BuyerRegistrationDto;
-import com.rustdv.marketplace.dto.createupdate.CreateUpdateCartDto;
 import com.rustdv.marketplace.dto.read.ReadBuyerDto;
-import com.rustdv.marketplace.dto.read.ReadCartDto;
-import com.rustdv.marketplace.dto.read.ReadGoodsDto;
-import com.rustdv.marketplace.exception.NoSuchElementException;
 import com.rustdv.marketplace.exception.NoUserWithSuchCredentialsException;
 import com.rustdv.marketplace.exception.UserAlreadyExistsException;
 import com.rustdv.marketplace.mapper.BuyerRegistrationDtoMapper;
-import com.rustdv.marketplace.mapper.CreateUpdateCartDtoMapper;
 import com.rustdv.marketplace.mapper.ReadBuyerDtoMapper;
-import com.rustdv.marketplace.mapper.ReadGoodsDtoMapper;
 import com.rustdv.marketplace.repository.BuyerRepository;
-import com.rustdv.marketplace.repository.CartRepository;
-import com.rustdv.marketplace.repository.GoodsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
