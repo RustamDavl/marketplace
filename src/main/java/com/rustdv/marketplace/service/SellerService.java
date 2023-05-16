@@ -4,6 +4,7 @@ import com.rustdv.marketplace.dto.auth.SellerRegistrationDto;
 import com.rustdv.marketplace.dto.createupdate.CreateUpdateGoodsDto;
 import com.rustdv.marketplace.dto.read.ReadGoodsDto;
 import com.rustdv.marketplace.dto.read.ReadSellerDto;
+import com.rustdv.marketplace.entity.Seller;
 import com.rustdv.marketplace.exception.NoSuchElementException;
 import com.rustdv.marketplace.exception.NoUserWithSuchCredentialsException;
 import com.rustdv.marketplace.exception.UserAlreadyExistsException;
@@ -25,37 +26,28 @@ public class SellerService {
 
     private final SellerRepository sellerRepository;
 
-    private final SellerRegistrationDtoMapper sellerRegistrationDtoMapper;
-
-    private final ReadSellerDtoMapper readSellerDtoMapper;
-
-
-
 
 
     @Transactional
-    public ReadSellerDto register(SellerRegistrationDto sellerRegistrationDto) {
+    public Seller register(Seller registrationSeller) {
 
-        var maybeSeller = sellerRepository.findByEmail(sellerRegistrationDto.getEmail());
+        var maybeSeller = sellerRepository.findByEmail(registrationSeller.getEmail());
         maybeSeller.ifPresent(
                 seller -> {
                     throw new UserAlreadyExistsException("Seller with such email already exists");
                 }
         );
-        var sellerToSave = sellerRegistrationDtoMapper.map(sellerRegistrationDto);
 
-        sellerRepository.save(sellerToSave);
+        sellerRepository.save(registrationSeller);
 
-        return readSellerDtoMapper.map(sellerToSave);
+        return registrationSeller;
     }
 
-    public ReadSellerDto findByEmailAndPassword(String email, String password) {
+    public Seller findByEmailAndPassword(String email, String password) {
 
         var maybeSeller = sellerRepository.findByEmailAndPassword(email, password);
 
-        return maybeSeller.map(
-                readSellerDtoMapper::map
-        ).orElseThrow(() -> {
+        return maybeSeller.orElseThrow(() -> {
                     throw new NoUserWithSuchCredentialsException("email or password are incorrect");
                 }
         );

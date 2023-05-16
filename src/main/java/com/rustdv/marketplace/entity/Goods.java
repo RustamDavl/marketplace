@@ -30,7 +30,7 @@ public class Goods {
     @Column(nullable = false)
     private BigDecimal price;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "shop_id", nullable = false)
     @ToString.Exclude
     private Shop shop;

@@ -4,6 +4,8 @@ import com.rustdv.marketplace.dto.auth.SellerRegistrationDto;
 import com.rustdv.marketplace.dto.createupdate.CreateUpdateGoodsDto;
 import com.rustdv.marketplace.exception.UserAlreadyExistsException;
 import com.rustdv.marketplace.integration.IntegrationTestBase;
+import com.rustdv.marketplace.mapper.BuyerRegistrationDtoMapper;
+import com.rustdv.marketplace.mapper.SellerRegistrationDtoMapper;
 import com.rustdv.marketplace.repository.SellerRepository;
 import com.rustdv.marketplace.service.SellerService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,8 @@ public class SellerServiceIT extends IntegrationTestBase {
 
     private final SellerService sellerService;
 
+    private final SellerRegistrationDtoMapper sellerRegistrationDtoMapper;
+
 
     @Test
     void registerShouldPass() {
@@ -32,7 +36,7 @@ public class SellerServiceIT extends IntegrationTestBase {
                 .phoneNumber("89179308071")
                 .ownershipForm("ИП")
                 .build();
-        var actualResult = sellerService.register(registrationSellerDtoRequest);
+        var actualResult = sellerService.register(sellerRegistrationDtoMapper.map(registrationSellerDtoRequest));
 
         assertThat(actualResult.getId()).isNotNull();
         assertThat(actualResult.getEmail()).isEqualTo(registrationSellerDtoRequest.getEmail());
@@ -51,7 +55,8 @@ public class SellerServiceIT extends IntegrationTestBase {
                 .ownershipForm("ИП")
                 .build();
 
-        org.junit.jupiter.api.Assertions.assertThrows(UserAlreadyExistsException.class, () -> sellerService.register(registrationSellerDtoRequest));
+        org.junit.jupiter.api.Assertions.assertThrows(UserAlreadyExistsException.class,
+                () -> sellerService.register(sellerRegistrationDtoMapper.map(registrationSellerDtoRequest)));
     }
 
 

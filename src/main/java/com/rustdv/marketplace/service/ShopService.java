@@ -4,6 +4,8 @@ import com.rustdv.marketplace.dto.createupdate.CreateUpdateGoodsDto;
 import com.rustdv.marketplace.dto.createupdate.CreateUpdateShopDto;
 import com.rustdv.marketplace.dto.read.ReadGoodsDto;
 import com.rustdv.marketplace.dto.read.ReadShopDto;
+import com.rustdv.marketplace.entity.Goods;
+import com.rustdv.marketplace.entity.Shop;
 import com.rustdv.marketplace.exception.NoSuchElementException;
 import com.rustdv.marketplace.exception.NotUniqueNameException;
 import com.rustdv.marketplace.mapper.CreateUpdateGoodsDtoMapper;
@@ -33,42 +35,40 @@ public class ShopService {
     private final ReadGoodsDtoMapper readGoodsDtoMapper;
 
     @Transactional
-    public ReadShopDto create(Long sellerId, CreateUpdateShopDto createUpdateShopDto) {
+    public Shop create(Long sellerId, Shop shop) {
 
-        var maybeShop = shopRepository.findByName(createUpdateShopDto.getName());
+        var maybeShop = shopRepository.findByName(shop.getName());
         maybeShop.ifPresent(
-                shop -> {
+                shop1 -> {
                     throw new NotUniqueNameException("shop with such name already exists");
                 }
         );
-        var shopToSave = createUpdateShopDtoMapper.map(createUpdateShopDto);
 
         var seller = sellerRepository.findById(sellerId);
         seller.ifPresent(
                 seller1 -> {
-                    seller1.addShop(shopToSave);
+                    seller1.addShop(shop);
                     sellerRepository.flush();
                 }
         );
 
 
-        return readShopDtoMapper.map(shopToSave);
+        return shop;
     }
 
     @Transactional
-    public ReadGoodsDto addGoods(Long shopId, CreateUpdateGoodsDto createUpdateGoodsDto) {
+    public Goods addGoods(Long shopId, Goods goods) {
 
         var shop = shopRepository.findById(shopId).orElseThrow(() ->
         {
             throw new NoSuchElementException("there is no such shop by this id");
         });
 
-        var goodsToSave = createUpdateGoodsDtoMapper.map(createUpdateGoodsDto);
 
-        shop.addGoods(goodsToSave);
+        shop.addGoods(goods);
         shopRepository.flush();
 
-        return readGoodsDtoMapper.map(goodsToSave);
+        return goods;
 
     }
 }

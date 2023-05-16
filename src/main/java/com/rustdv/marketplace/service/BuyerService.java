@@ -1,17 +1,13 @@
 package com.rustdv.marketplace.service;
 
-import com.rustdv.marketplace.dto.auth.BuyerRegistrationDto;
-import com.rustdv.marketplace.dto.read.ReadBuyerDto;
+import com.rustdv.marketplace.entity.Buyer;
 import com.rustdv.marketplace.exception.NoUserWithSuchCredentialsException;
 import com.rustdv.marketplace.exception.UserAlreadyExistsException;
-import com.rustdv.marketplace.mapper.BuyerRegistrationDtoMapper;
-import com.rustdv.marketplace.mapper.ReadBuyerDtoMapper;
 import com.rustdv.marketplace.repository.BuyerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,15 +16,11 @@ public class BuyerService {
 
     private final BuyerRepository buyerRepository;
 
-    private final BuyerRegistrationDtoMapper buyerRegistrationDtoMapper;
-
-    private final ReadBuyerDtoMapper readBuyerDtoMapper;
-
 
     @Transactional
-    public ReadBuyerDto register(BuyerRegistrationDto registrationDto) {
+    public Buyer register(Buyer registrationBuyer) {
 
-        var maybeBuyer = buyerRepository.findByEmail(registrationDto.getEmail());
+        var maybeBuyer = buyerRepository.findByEmail(registrationBuyer.getEmail());
 
         maybeBuyer.ifPresent(
                 buyer -> {
@@ -36,35 +28,20 @@ public class BuyerService {
                 }
         );
 
-        var buyerToSave = buyerRegistrationDtoMapper.map(registrationDto);
-        buyerRepository.save(buyerToSave);
+        buyerRepository.save(registrationBuyer);
+        buyerRepository.flush();
 
-        return readBuyerDtoMapper.map(buyerToSave);
+        return registrationBuyer;
 
     }
 
-    public ReadBuyerDto findByEmailAndPassword(String email, String password) {
+    public Buyer findByEmailAndPassword(String email, String password) {
 
         var maybeBuyer = buyerRepository.findByEmailAndPassword(email, password);
 
-        return maybeBuyer.map(
-                readBuyerDtoMapper::map
-        ).orElseThrow(() -> {
+        return maybeBuyer.orElseThrow(() -> {
                     throw new NoUserWithSuchCredentialsException("email or password are incorrect");
                 }
-        );
-
-
-    }
-
-
-
-    public Optional<ReadBuyerDto> findById(Long id) {
-
-        var maybeBuyer = buyerRepository.findById(id);
-
-        return maybeBuyer.map(
-                readBuyerDtoMapper::map
         );
 
 

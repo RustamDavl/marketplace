@@ -3,6 +3,7 @@ package com.rustdv.marketplace.integration.service;
 import com.rustdv.marketplace.dto.auth.BuyerRegistrationDto;
 import com.rustdv.marketplace.exception.UserAlreadyExistsException;
 import com.rustdv.marketplace.integration.IntegrationTestBase;
+import com.rustdv.marketplace.mapper.BuyerRegistrationDtoMapper;
 import com.rustdv.marketplace.repository.BuyerRepository;
 import com.rustdv.marketplace.service.BuyerService;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,8 @@ class BuyerServiceIT extends IntegrationTestBase {
 
     private final BuyerService buyerService;
 
+    private final BuyerRegistrationDtoMapper buyerRegistrationDtoMapper;
+
 
     @Test
     void registerShouldPass() {
@@ -38,15 +41,16 @@ class BuyerServiceIT extends IntegrationTestBase {
                 "16k1",
                 "мужчина",
                 LocalDate.parse("2001-01-29"));
+        var buyer = buyerRegistrationDtoMapper.map(buyerRegistrationRequest);
 
-        var actualResult = buyerService.register(buyerRegistrationRequest);
+        var actualResult = buyerService.register(buyer);
 
         assertThat(actualResult).isNotNull();
         assertThat(actualResult.getEmail()).isEqualTo(buyerRegistrationRequest.getEmail());
         assertThat(actualResult.getPhoneNumber()).isEqualTo(buyerRegistrationRequest.getPhoneNumber());
-        assertThat(actualResult.getCity()).isEqualTo(buyerRegistrationRequest.getCity());
-        assertThat(actualResult.getStreet()).isEqualTo(buyerRegistrationRequest.getStreet());
-        assertThat(actualResult.getHouseNumber()).isEqualTo(buyerRegistrationRequest.getHouseNumber());
+        assertThat(actualResult.getAddress().getCity()).isEqualTo(buyerRegistrationRequest.getCity());
+        assertThat(actualResult.getAddress().getStreet()).isEqualTo(buyerRegistrationRequest.getStreet());
+        assertThat(actualResult.getAddress().getHouseNumber()).isEqualTo(buyerRegistrationRequest.getHouseNumber());
         assertThat(actualResult.getBirthDate()).isEqualTo(buyerRegistrationRequest.getBirthDate());
     }
 
@@ -62,9 +66,10 @@ class BuyerServiceIT extends IntegrationTestBase {
                 "16k1",
                 "мужчина",
                 LocalDate.parse("2001-01-29"));
+        var buyer = buyerRegistrationDtoMapper.map(buyerRegistrationRequest);
 
 
-        org.junit.jupiter.api.Assertions.assertThrows(UserAlreadyExistsException.class, () -> buyerService.register(buyerRegistrationRequest));
+        org.junit.jupiter.api.Assertions.assertThrows(UserAlreadyExistsException.class, () -> buyerService.register(buyer));
 
     }
 }
