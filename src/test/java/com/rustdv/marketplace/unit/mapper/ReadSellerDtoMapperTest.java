@@ -35,7 +35,7 @@ class ReadSellerDtoMapperTest {
         expectedResult = ReadSellerDto.builder()
                 .id(10L)
                 .email("easton12345@gmail.com")
-                .magazineName("name")
+                .ownershipForm("ИП")
                 .registerAt(seller.getRegisterAt())
                 .build();
     }
@@ -44,7 +44,6 @@ class ReadSellerDtoMapperTest {
     void map() {
         ReadSellerDto actualSeller = readSellerDtoMapper.map(seller);
         assertThat(actualSeller.getEmail()).isEqualTo(expectedResult.getEmail());
-        assertThat(actualSeller.getMagazineName()).isEqualTo(expectedResult.getMagazineName());
         assertThat(actualSeller.getId()).isEqualTo(expectedResult.getId());
         assertThat(actualSeller.getRegisterAt()).isEqualTo(expectedResult.getRegisterAt());
 
