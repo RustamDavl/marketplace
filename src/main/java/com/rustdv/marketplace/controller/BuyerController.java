@@ -4,7 +4,6 @@ import com.rustdv.marketplace.dto.auth.BuyerLoginDto;
 import com.rustdv.marketplace.dto.auth.BuyerRegistrationDto;
 import com.rustdv.marketplace.dto.read.ReadBuyerDto;
 import com.rustdv.marketplace.facade.BuyerAuthFacade;
-import com.rustdv.marketplace.facade.BuyerAuthFacadeImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

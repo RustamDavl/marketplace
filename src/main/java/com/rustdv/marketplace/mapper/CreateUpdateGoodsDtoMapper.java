@@ -2,7 +2,6 @@ package com.rustdv.marketplace.mapper;
 
 import com.rustdv.marketplace.dto.createupdate.CreateUpdateGoodsDto;
 import com.rustdv.marketplace.entity.Goods;
-import com.rustdv.marketplace.entity.embeddable.GoodsCategory;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;

@@ -6,8 +6,6 @@ import com.rustdv.marketplace.entity.embeddable.Address;
 import com.rustdv.marketplace.entity.embeddable.Gender;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
-
 @Component
 public class BuyerRegistrationDtoMapper implements Mapper<BuyerRegistrationDto, Buyer> {
     @Override
