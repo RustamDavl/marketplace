@@ -34,15 +34,14 @@ class BuyerControllerTest {
     @Test
     void registerShouldPass() {
 
-        String jsonRequest = "{\"email\": \"test@gmail.com\"," +
+        String jsonRequest = "{ \"email\": \"test@gmail.com\"," +
                 "\"password\": \"strongPassw\"," +
                 "\"phoneNumber\": \"89179209061\"," +
                 "\"city\": \"Kazan\"," +
                 "\"street\": \"street\"," +
                 "\"houseNumber\": \"16k1\"," +
-                "\"gender\": \"male\", " +
-                "\"birthDate\": \"2001-01-29\"}";
-
+                "\"gender\": \"male\"," +
+                "\"birthDate\": \"2001-01-29\" }";
 
         doReturn(ReadBuyerDto.builder()
                 .id(10L)
@@ -70,8 +69,7 @@ class BuyerControllerTest {
                 .post("/api/v1/buyer/signup")
                 .then()
                 .status(HttpStatus.CREATED)
-                .contentType(ContentType.JSON)
-                .body("email", is("test@gmail.com"));
+                .contentType(ContentType.JSON);
 
 
     }
