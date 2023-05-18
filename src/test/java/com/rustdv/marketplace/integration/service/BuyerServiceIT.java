@@ -4,11 +4,8 @@ import com.rustdv.marketplace.dto.auth.BuyerRegistrationDto;
 import com.rustdv.marketplace.exception.UserAlreadyExistsException;
 import com.rustdv.marketplace.integration.IntegrationTestBase;
 import com.rustdv.marketplace.mapper.BuyerRegistrationDtoMapper;
-import com.rustdv.marketplace.repository.BuyerRepository;
-import com.rustdv.marketplace.service.BuyerService;
+import com.rustdv.marketplace.service.BuyerServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
@@ -16,7 +13,6 @@ import org.springframework.test.context.jdbc.SqlConfig;
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @RequiredArgsConstructor
 @Sql(
@@ -25,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 )
 class BuyerServiceIT extends IntegrationTestBase {
 
-    private final BuyerService buyerService;
+    private final BuyerServiceImpl buyerService;
 
     private final BuyerRegistrationDtoMapper buyerRegistrationDtoMapper;
 

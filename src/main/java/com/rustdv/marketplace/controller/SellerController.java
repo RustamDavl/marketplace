@@ -7,7 +7,7 @@ import com.rustdv.marketplace.dto.createupdate.CreateUpdateShopDto;
 import com.rustdv.marketplace.dto.read.ReadGoodsDto;
 import com.rustdv.marketplace.dto.read.ReadSellerDto;
 import com.rustdv.marketplace.dto.read.ReadShopDto;
-import com.rustdv.marketplace.facade.SellerServiceFacade;
+import com.rustdv.marketplace.facade.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,14 +21,18 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class SellerController {
 
-    private final SellerServiceFacade sellerServiceFacade;
+    private final SellerAuthFacade sellerServiceFacadeImpl;
+
+    private final ShopServiceFacade<ReadShopDto, CreateUpdateShopDto> shopServiceFacadeImpl;
+
+    private final GoodsServiceFacade<ReadGoodsDto, CreateUpdateGoodsDto> goodsServiceFacadeImpl;
 
     @PostMapping("/signup")
     public ResponseEntity<ReadSellerDto> signUp(@RequestBody @Valid SellerRegistrationDto sellerRegistrationDto) {
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(sellerServiceFacade.signUp(sellerRegistrationDto));
+                .body(sellerServiceFacadeImpl.signUp(sellerRegistrationDto));
     }
 
     @PostMapping("/signin")
@@ -36,7 +40,7 @@ public class SellerController {
 
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(sellerServiceFacade.signIn(sellerLoginDto));
+                .body(sellerServiceFacadeImpl.signIn(sellerLoginDto));
     }
 
     @PostMapping("/{id}/shop")
@@ -46,7 +50,7 @@ public class SellerController {
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(sellerServiceFacade.createShop(id, createUpdateShopDto));
+                .body(shopServiceFacadeImpl.createShop(id, createUpdateShopDto));
     }
 
 
@@ -57,7 +61,7 @@ public class SellerController {
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(sellerServiceFacade.addGoods(shopId, createUpdateGoodsDto));
+                .body(goodsServiceFacadeImpl.addGoods(shopId, createUpdateGoodsDto));
     }
 
 

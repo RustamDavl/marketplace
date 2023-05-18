@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class BuyerRegistrationDto {
+public class BuyerRegistrationDto  {
 
     @Email
     private String email;

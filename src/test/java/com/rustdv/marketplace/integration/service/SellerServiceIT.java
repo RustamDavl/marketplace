@@ -1,13 +1,10 @@
 package com.rustdv.marketplace.integration.service;
 
 import com.rustdv.marketplace.dto.auth.SellerRegistrationDto;
-import com.rustdv.marketplace.dto.createupdate.CreateUpdateGoodsDto;
 import com.rustdv.marketplace.exception.UserAlreadyExistsException;
 import com.rustdv.marketplace.integration.IntegrationTestBase;
-import com.rustdv.marketplace.mapper.BuyerRegistrationDtoMapper;
 import com.rustdv.marketplace.mapper.SellerRegistrationDtoMapper;
-import com.rustdv.marketplace.repository.SellerRepository;
-import com.rustdv.marketplace.service.SellerService;
+import com.rustdv.marketplace.service.SellerServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.jdbc.Sql;
@@ -23,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 )
 public class SellerServiceIT extends IntegrationTestBase {
 
-    private final SellerService sellerService;
+    private final SellerServiceImpl sellerService;
 
     private final SellerRegistrationDtoMapper sellerRegistrationDtoMapper;
 

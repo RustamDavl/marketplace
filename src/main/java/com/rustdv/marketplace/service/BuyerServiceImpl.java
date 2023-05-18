@@ -12,12 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class BuyerService {
+public class BuyerServiceImpl implements UserService<Buyer, Long> {
 
     private final BuyerRepository buyerRepository;
 
-
     @Transactional
+    @Override
     public Buyer register(Buyer registrationBuyer) {
 
         var maybeBuyer = buyerRepository.findByEmail(registrationBuyer.getEmail());
@@ -35,6 +35,7 @@ public class BuyerService {
 
     }
 
+    @Override
     public Buyer findByEmailAndPassword(String email, String password) {
 
         var maybeBuyer = buyerRepository.findByEmailAndPassword(email, password);

@@ -2,12 +2,9 @@ package com.rustdv.marketplace.unit.controller;
 
 import com.rustdv.marketplace.controller.BuyerController;
 import com.rustdv.marketplace.dto.auth.BuyerRegistrationDto;
-import com.rustdv.marketplace.dto.read.ReadBuyerDto;
-import com.rustdv.marketplace.exception.handler.ControllerExceptionHandler;
-import com.rustdv.marketplace.facade.BuyerServiceFacade;
+import com.rustdv.marketplace.facade.BuyerAuthFacadeImpl;
 import com.rustdv.marketplace.mapper.BuyerRegistrationDtoMapper;
 import com.rustdv.marketplace.mapper.ReadBuyerDtoMapper;
-import com.rustdv.marketplace.service.BuyerService;
 import io.restassured.http.ContentType;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,14 +14,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.testcontainers.shaded.com.fasterxml.jackson.core.JsonProcessingException;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.doReturn;
 
@@ -33,7 +28,7 @@ class BuyerControllerTest {
 
 
     @Mock
-    BuyerServiceFacade buyerServiceFacade;
+    BuyerAuthFacadeImpl buyerServiceFacadeImpl;
     @InjectMocks
     private BuyerController buyerController;
     private ObjectMapper objectMapper;
@@ -72,7 +67,7 @@ class BuyerControllerTest {
         var buyer = buyerRegistrationDtoMapper.map(buyerRegistrationRequest);
         buyer.setRegisterAt(LocalDateTime.now());
         var readBuyerDto = readBuyerDtoMapper.map(buyer);
-        doReturn(readBuyerDto).when(buyerServiceFacade).signUp(buyerRegistrationRequest);
+        doReturn(readBuyerDto).when(buyerServiceFacadeImpl).signUp(buyerRegistrationRequest);
 
         var actualResult = buyerController.signUp(buyerRegistrationRequest);
 

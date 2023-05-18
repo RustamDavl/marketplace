@@ -3,6 +3,7 @@ package com.rustdv.marketplace.controller;
 import com.rustdv.marketplace.dto.createupdate.CreateUpdateCartDto;
 import com.rustdv.marketplace.dto.read.ReadCartDto;
 import com.rustdv.marketplace.facade.CartServiceFacade;
+import com.rustdv.marketplace.facade.CartServiceFacadeImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,7 +18,7 @@ import java.util.List;
 @RequestMapping("/api/v1/cart")
 public class CartController {
 
-    private final CartServiceFacade cartServiceFacade;
+    private final CartServiceFacade<ReadCartDto, CreateUpdateCartDto> cartServiceFacadeImpl;
 
     @PostMapping
     public ResponseEntity<ReadCartDto> addGoods(@RequestBody @Valid
@@ -25,7 +26,7 @@ public class CartController {
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(cartServiceFacade.addGoods(createUpdateCartDto));
+                .body(cartServiceFacadeImpl.addGoods(createUpdateCartDto));
 
     }
 
@@ -36,7 +37,7 @@ public class CartController {
 
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(cartServiceFacade.buyGoods(createUpdateCartDto));
+                .body(cartServiceFacadeImpl.buyGoods(createUpdateCartDto));
 
     }
 
@@ -46,7 +47,7 @@ public class CartController {
 
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(cartServiceFacade.findAll(buyerId));
+                .body(cartServiceFacadeImpl.findAllByBuyerId(buyerId));
     }
 
 
