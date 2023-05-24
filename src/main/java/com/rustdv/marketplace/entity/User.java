@@ -15,11 +15,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @ToString
 @MappedSuperclass
-public abstract class User<ID extends Serializable> {
+public abstract class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected ID id;
+    protected Long id;
     @Column(unique = true)
     protected String email;
     protected String password;

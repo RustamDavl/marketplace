@@ -18,7 +18,7 @@ import java.util.Objects;
 @SuperBuilder
 @Entity
 @Table(name = "seller")
-public class Seller extends User<Long> {
+public class Seller extends User {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "ownership_form", nullable = false)

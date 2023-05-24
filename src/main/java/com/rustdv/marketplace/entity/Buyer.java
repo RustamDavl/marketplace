@@ -23,7 +23,7 @@ import java.util.Objects;
 @Entity
 @SuperBuilder
 @Table(name = "buyer")
-public class Buyer extends User<Long> {
+public class Buyer extends User {
 
 
 
