@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class GoodsServiceFacadeImpl implements GoodsServiceFacade<ReadGoodsDto, CreateUpdateGoodsDto> {
+public class GoodsServiceFacadeImpl implements GoodsServiceFacade {
 
     private final ReadGoodsDtoMapper readGoodsDtoMapper;
 

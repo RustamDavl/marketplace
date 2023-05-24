@@ -53,6 +53,6 @@ public class Shop {
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(name, goodsCategory, seller.hashCode());
     }
 }

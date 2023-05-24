@@ -60,6 +60,6 @@ public class Cart {
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(buyer.hashCode(), goods.hashCode(), purchaseStatus, amount);
     }
 }

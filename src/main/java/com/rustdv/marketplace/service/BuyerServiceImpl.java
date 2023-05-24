@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class BuyerServiceImpl implements UserService<Buyer, Long> {
+public class BuyerServiceImpl implements UserService<Buyer> {
 
     private final BuyerRepository buyerRepository;
 

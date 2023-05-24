@@ -2,13 +2,16 @@ package com.rustdv.marketplace.facade;
 
 
 
+import com.rustdv.marketplace.dto.createupdate.CreateUpdateCartDto;
+import com.rustdv.marketplace.dto.read.ReadCartDto;
+
 import java.util.List;
 
-public interface CartServiceFacade<R, C> {
+public interface CartServiceFacade {
 
-    R addGoods(C object);
+    ReadCartDto addGoods(CreateUpdateCartDto object);
 
-    R buyGoods(C object);
+    ReadCartDto buyGoods(CreateUpdateCartDto object);
 
-    List<R> findAllByBuyerId(Long buyerId);
+    List<ReadCartDto> findAllByBuyerId(Long buyerId);
 }

@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class SellerServiceImpl implements UserService<Seller, Long> {
+public class SellerServiceImpl implements UserService<Seller> {
 
     private final SellerRepository sellerRepository;
 

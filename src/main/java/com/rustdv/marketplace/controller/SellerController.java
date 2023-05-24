@@ -23,9 +23,9 @@ public class SellerController {
 
     private final SellerAuthFacade sellerServiceFacadeImpl;
 
-    private final ShopServiceFacade<ReadShopDto, CreateUpdateShopDto> shopServiceFacadeImpl;
+    private final ShopServiceFacade shopServiceFacadeImpl;
 
-    private final GoodsServiceFacade<ReadGoodsDto, CreateUpdateGoodsDto> goodsServiceFacadeImpl;
+    private final GoodsServiceFacade goodsServiceFacadeImpl;
 
     @PostMapping("/signup")
     public ResponseEntity<ReadSellerDto> signUp(@RequestBody @Valid SellerRegistrationDto sellerRegistrationDto) {

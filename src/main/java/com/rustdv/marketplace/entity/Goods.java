@@ -53,6 +53,6 @@ public class Goods {
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(name, price, amount);
     }
 }

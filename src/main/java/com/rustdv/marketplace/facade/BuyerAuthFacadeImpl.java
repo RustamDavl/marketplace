@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class BuyerAuthFacadeImpl implements BuyerAuthFacade {
-    private final UserService<Buyer, Long> buyerServiceImpl;
+    private final UserService<Buyer> buyerServiceImpl;
 
     private final BuyerRegistrationDtoMapper buyerRegistrationDtoMapper;
 

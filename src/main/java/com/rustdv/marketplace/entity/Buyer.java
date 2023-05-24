@@ -54,6 +54,6 @@ public class Buyer extends User<Long> {
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(super.email);
     }
 }

@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping("/api/v1/cart")
 public class CartController {
 
-    private final CartServiceFacade<ReadCartDto, CreateUpdateCartDto> cartServiceFacadeImpl;
+    private final CartServiceFacade cartServiceFacadeImpl;
 
     @PostMapping
     public ResponseEntity<ReadCartDto> addGoods(@RequestBody @Valid

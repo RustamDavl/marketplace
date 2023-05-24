@@ -12,7 +12,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class CartServiceFacadeImpl implements CartServiceFacade<ReadCartDto, CreateUpdateCartDto> {
+public class CartServiceFacadeImpl implements CartServiceFacade {
 
     private final CartService cartServiceImpl;
 

@@ -30,10 +30,10 @@ public class SellerControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private ShopServiceFacade<ReadShopDto, CreateUpdateShopDto> shopServiceFacadeImpl;
+    private ShopServiceFacade shopServiceFacadeImpl;
 
     @MockBean
-    private GoodsServiceFacade<ReadGoodsDto, CreateUpdateGoodsDto> goodsServiceFacadeImpl;
+    private GoodsServiceFacade goodsServiceFacadeImpl;
 
     @MockBean
     private SellerAuthFacade sellerServiceFacadeImpl;

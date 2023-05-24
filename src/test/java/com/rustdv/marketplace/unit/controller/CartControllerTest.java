@@ -31,7 +31,7 @@ public class CartControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private CartServiceFacade<ReadCartDto, CreateUpdateCartDto> cartServiceFacadeImpl;
+    private CartServiceFacade cartServiceFacadeImpl;
 
     @BeforeEach
     void setUp() {

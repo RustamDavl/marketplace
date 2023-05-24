@@ -1,7 +1,10 @@
 package com.rustdv.marketplace.facade;
 
 
-public interface ShopServiceFacade<R, C> {
+import com.rustdv.marketplace.dto.createupdate.CreateUpdateShopDto;
+import com.rustdv.marketplace.dto.read.ReadShopDto;
 
-    R createShop(Long sellerId, C createUpdateShopDto);
+public interface ShopServiceFacade {
+
+    ReadShopDto createShop(Long sellerId, CreateUpdateShopDto createUpdateShopDto);
 }
